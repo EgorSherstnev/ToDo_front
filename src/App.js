@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import "./css/style.css"
+import TaskBar from "./partials/TaskBar";
+import TaskList from "./partials/TasksList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [tasks, setTasks] = useState([]);
+
+    const onTaskSubmit = (task) => {
+        setTasks([...tasks,task ]);
+        //console.log(tasks);
+    };
+
+    const deleteTask = (taskIndex) => {
+        //console.log('Удалил задачу №' + taskIndex);
+        const delTasks = tasks.filter((_, index) => index !== taskIndex);
+        setTasks(delTasks);
+    };
+
+    return(
+        <div className="wrapper ">
+            <div className="container">
+                <div>
+                    <TaskBar onTaskSubmit={onTaskSubmit} />
+                </div>
+                <div>
+                    <TaskList 
+                        tasks={tasks}
+                        deleteTask={deleteTask}
+                    />
+                </div>
+            </div>
+            
+        </div>
+    );
+};
 
 export default App;
