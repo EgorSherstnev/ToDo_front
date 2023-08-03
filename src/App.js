@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import "./css/style.css"
+import ListBar from "./partials/ListsBar";
+import Lists from "./partials/Lists";
 import TaskBar from "./partials/TaskBar";
 import TaskList from "./partials/TasksList";
 
@@ -20,6 +22,8 @@ const App = () => {
     return(
         <div className="wrapper ">
             <div className="container">
+                <ListBar />
+                <Lists />
                 <div>
                     <TaskBar onTaskSubmit={onTaskSubmit} />
                 </div>

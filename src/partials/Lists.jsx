@@ -13,7 +13,7 @@ const Lists = () => {
   // Функция для загрузки списков с сервера
    const fetchLists = async () => {
       try {
-         const response = await axios.get('/api/lists'); 
+         const response = await axios.get('http://localhost:5000/api/task/get_all_lists'); 
          setLists(response.data);
       } catch (error) {
          console.error('Ошибка при загрузке списков:', error);
