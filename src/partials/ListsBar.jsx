@@ -1,13 +1,18 @@
 import React from "react";
-import { getAllLists } from "../http/taskAPI";
+//import { getAllLists } from "../http/taskAPI";
+import { useDispatch } from "react-redux";
+import { fetchGetLists } from "../actions";
 
 const ListBar = () => {
+
+    const dispatch = useDispatch()
 
     const click = async(e) => {
         e.preventDefault();
         try {
-            let data = await getAllLists()
-            console.log(data);
+            //let data = await getAllLists()
+            dispatch(fetchGetLists())
+            //console.log(data);
         } catch (e) {
             alert(e.response.data.message)
         }

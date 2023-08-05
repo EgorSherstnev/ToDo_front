@@ -5,6 +5,6 @@ export const setLists = list => ({
    payload: list,
 })
 
-export const fetchLists = () => ({
+export const fetchGetLists = () => ({
    type: FETCH_LISTS,
 })
