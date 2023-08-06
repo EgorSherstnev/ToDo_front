@@ -26,7 +26,7 @@ const TaskItem = ({task, deleteTask, id}) => {
             <div className="">
                 <button  
                     className="" 
-                    onClick={() => {deleteTask(id)}}
+                    //onClick={() => {deleteTask(id)}}
                 >
                     Удалить Задачу
                 </button>

@@ -1,14 +1,17 @@
 import React from "react";
 import TaskItem from "./TaskItem";
+import { useSelector } from "react-redux";
 
-const TaskList = ({tasks, deleteTask}) => {
-    const renderList = tasks.map((task, index) => {
+const TaskList = () => {
+    const tasks = useSelector(state => state.taskReducer.tasks);
+
+    const renderList = tasks.map((task) => {
         return (
             <TaskItem 
-                key={index.toString()}
-                id={index}
-                deleteTask={deleteTask}
-                task={task}
+                key={task.unicId}
+                id={task.id}
+                //deleteTask={deleteTask}
+                task={task.taskName}
             />
         )
     })

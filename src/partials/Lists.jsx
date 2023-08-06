@@ -1,38 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchGetTasks } from '../actions';
+import { getAllTasks, getTasksByList } from '../http/taskAPI';
 
 const Lists = () => {
-//   // Состояние для хранения списка списков
-//    const [lists, setLists] = useState([]);
+   const [selectedListId, setSelectedListId] = useState('');
 
-//   // Загрузка списков с сервера при монтировании компонента
-//    useEffect(() => {
-//       fetchLists();
-//    }, []);
+   const dispatch = useDispatch();
+   const listsTasks = useSelector(state => state.listsReducer.lists);
 
-//   // Функция для загрузки списков с сервера
-//    const fetchLists = async () => {
-//       try {
-//          const response = await axios.get('http://localhost:5000/api/task/get_all_lists'); 
-//          setLists(response.data);
-//       } catch (error) {
-//          console.error('Ошибка при загрузке списков:', error);
-//       }
-//    };
+   const handleListSelect = (event) => {
+      const listId = event.target.value;
+      setSelectedListId(listId);
+      console.log("Selected listId:", listId);
+      
+      const action = { type: 'FETCH_TASKS', payload: { listId } };
+      dispatch(action); // Диспатч действия с выбранным listId в качестве полезной нагрузки
+   };
 
-   const listsTasks = useSelector(state => state.listsReducer.lists)
+   // const click = async(e) => {
+   //    e.preventDefault();
+   //    try {
+   //       console.log(selectedListId)
+   //       let data = await getTasksByList({ listId: selectedListId });
+   //       //let data = await getAllTasks()
+   //       console.log(data)
+   //    } catch (e) {
+   //       alert(e.response.data.message)
+   //    }
+   // }
 
    return (
       <div>
+         {/* <button 
+            className="button"
+            onClick={click}
+         >
+            Получить задачи
+         </button> */}
          <h2>Списки задач</h2>
-         <select>
-         {/* Отображение списка списков в выпадающем списке */}
-         {listsTasks.map((list) => (
-            <option key={list.id} value={list.id}>
-               {list.taskList}
-            </option>
-         ))}
+         <select onChange={handleListSelect}>
+            {/* Отображение списка списков в выпадающем списке */}
+            {listsTasks.map((list) => (
+               <option key={list.id} value={list.id}>
+                  {list.taskList}
+               </option>
+            ))}
          </select>
       </div>
    );
