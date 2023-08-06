@@ -7,3 +7,5 @@ export const SET_SELECTED_LIST_ID  = 'SET_SELECTED_LIST_ID ';
 
 export const SET_TASKS = 'SET_TASKS';
 export const FETCH_TASKS = 'FETCH_TASKS';
+export const NEW_TASK = 'NEW_TASK';
+export const UPLOAD_NEW_TASK = 'UPLOAD_NEW_TASK';

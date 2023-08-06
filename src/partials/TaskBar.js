@@ -1,22 +1,31 @@
 import React, {useState} from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { uploadNewTask } from "../actions";
 
 const TaskBar = ({onTaskSubmit}) => {
-    const [task, setTask] = useState('');
+    const [taskName, setTaskName] = useState('');
+    const currentSelectedListId = useSelector(state => state.listsReducer.selectedListId); // Получение текущего selectedListId из хранилища
+    const dispatch = useDispatch()
 
     const onInputChange = (event) => {
-        setTask(event.target.value);
+        setTaskName(event.target.value);
     };
 
-    const onAddTask = (event) => {
+
+    const handleAddTask = async(event) => {
         event.preventDefault();
-        onTaskSubmit(task);
-       // console.log('добавил таску')
-        setTask('');
-        //console.log('очистил поле')
-    };
-
-    const currentSelectedListId = useSelector(state => state.listsReducer.selectedListId); // Получение текущего selectedListId из хранилища
+        try {
+            console.log(taskName)
+            await dispatch(uploadNewTask({
+                listId: currentSelectedListId,
+                taskName: taskName,
+                taskDescription: 'null',
+        }   ))
+            setTaskName('');
+        } catch (e) {
+            alert(e.response.data.message)
+        }
+    }
 
     return (
         <div className="">
@@ -27,12 +36,12 @@ const TaskBar = ({onTaskSubmit}) => {
                     <input 
                         className="taskbar__input input"
                         type="text"
-                        value={task}
+                        value={taskName}
                         onChange={onInputChange}
                     />
                     <button 
                         value="clickme"
-                        onClick={onAddTask }
+                        onClick={handleAddTask }
                     >
                         Добавить
                     </button>

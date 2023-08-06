@@ -11,6 +11,11 @@ export const createListAPI = async(taskList) => {
 }
 
 
+export const createTaskAPI = async (listId, taskName, taskDescription) => {
+   const {data} = await $api.post('api/task/create', {listId, taskName, taskDescription:'null'})
+   return data
+}
+
 export const getTasksByList = async (listId) => {
    console.log("listId  в  getTasksByList:", listId)
    const response = await $api.get('api/task/get_tasks_by_list', {
