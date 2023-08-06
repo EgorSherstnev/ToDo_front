@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useSelector } from "react-redux";
 
 const TaskBar = ({onTaskSubmit}) => {
     const [task, setTask] = useState('');
@@ -14,6 +15,8 @@ const TaskBar = ({onTaskSubmit}) => {
         setTask('');
         //console.log('очистил поле')
     };
+
+    const currentSelectedListId = useSelector(state => state.listsReducer.selectedListId); // Получение текущего selectedListId из хранилища
 
     return (
         <div className="">

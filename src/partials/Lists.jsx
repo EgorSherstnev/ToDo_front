@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { setListId } from '../actions';
 import { fetchGetTasks } from '../actions';
 import { getAllTasks, getTasksByList } from '../http/taskAPI';
 
@@ -9,13 +10,17 @@ const Lists = () => {
    const dispatch = useDispatch();
    const listsTasks = useSelector(state => state.listsReducer.lists);
 
+
    const handleListSelect = (event) => {
       const listId = event.target.value;
       setSelectedListId(listId);
       console.log("Selected listId:", listId);
       
-      const action = { type: 'FETCH_TASKS', payload: { listId } };
+      const action = { type: 'FETCH_TASKS', payload: { listId } }; //ИСПРАВИТЬ!!!
       dispatch(action); // Диспатч действия с выбранным listId в качестве полезной нагрузки
+
+
+      dispatch(setListId(listId))
    };
 
    // const click = async(e) => {

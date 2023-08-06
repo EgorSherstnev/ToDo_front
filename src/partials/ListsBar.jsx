@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 //import { getAllLists } from "../http/taskAPI";
 import { useDispatch } from "react-redux";
-import { fetchGetLists } from "../actions";
+import { fetchGetLists, uploadNewList } from "../actions";
 
 const ListBar = () => {
-
+    const [taskList, setTaskList] = useState('');
     const dispatch = useDispatch()
 
-    const click = async(e) => {
+    const handleAddList = async (event) => {
+        event.preventDefault();
+        try {
+            console.log(taskList)
+            await dispatch(uploadNewList(taskList));
+            setTaskList('');
+        } catch (e) {
+            alert(e.response.data.message)
+        }
+    };
+    
+    const handleUpdateLists = async(e) => {
         e.preventDefault();
         try {
             //let data = await getAllLists()
@@ -27,18 +38,13 @@ const ListBar = () => {
                     <input 
                         className="listbar__input input"
                         type="text"
-                        //value={list}
-                        //onChange={onInputChange}
+                        value={taskList}
+                        onChange={(e) => setTaskList(e.target.value)}
                     />
-                    <button 
-                        value="clickme"
-                        //onClick={onAddTask }
-                    >
-                        Добавить
-                    </button>
+                    <button onClick={handleAddList}>Добавить</button>
                     <button 
                         className="button"
-                        onClick={click}
+                        onClick={handleUpdateLists}
                     >
                         Обновить
                     </button>

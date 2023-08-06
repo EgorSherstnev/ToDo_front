@@ -1,10 +1,11 @@
 import { all } from "redux-saga/effects";
-import { getListsWatcher } from "./listSaga";
+import { getListsWatcher, uploadNewListWatcher } from "./listSaga";
 import { getTasksByListWatcher } from "./taskSaga";
 
 export function* rootWatcher() {
    yield all([
       getListsWatcher(), 
+      uploadNewListWatcher(),
       getTasksByListWatcher()
    ])
 }

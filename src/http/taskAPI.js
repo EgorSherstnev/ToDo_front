@@ -1,10 +1,14 @@
 import $api from "./index"
 
 export const getAllLists = async () => {
-   const response = await $api.get('api/list/get_all_lists')
-   return response.data
+   const {data} = await $api.get('api/list/get_all_lists')
+   return data
 }
 
+export const createListAPI = async(taskList) => {
+   const {data} = await $api.post('api/list/create', {taskList})
+   return data
+}
 
 
 export const getTasksByList = async (listId) => {
