@@ -1,7 +1,27 @@
-import {put, takeEvery, call} from "redux-saga/effects"
-import { FETCH_TASKS, UPLOAD_NEW_TASK } from "../actions/types"
-import { createTask, setTasks } from "../actions"
-import { createTaskAPI, getTasksByList } from "../http/taskAPI"
+import {
+   put, 
+   takeEvery, 
+   call
+} from "redux-saga/effects"
+
+import { 
+   FETCH_TASKS, 
+   REQUEST_DELETE_TASK, 
+   SET_TASKS, 
+   UPLOAD_NEW_TASK 
+} from "../actions/types"
+
+import { 
+   createTask, 
+   deleteTaskSuccess, 
+   setTasks 
+} from "../actions"
+
+import { 
+   createTaskAPI, 
+   deleteTaskAPI, 
+   getTasksByList 
+} from "../http/taskAPI"
 
 function* fetchGetTasksByListWorker(action) {
    try {
@@ -29,10 +49,24 @@ function* uploadNewTaskWorker(action) {
    }
 }
 
+function* deleteTaskWorker(action) {
+   try {
+      const unicId = action.payload;
+      console.log(" unicId in saga:", unicId);
+      yield call(deleteTaskAPI, unicId);
+      yield put(deleteTaskSuccess(unicId));
+   } catch (error) {
+      console.error("ERROR deleting task:", error);
+   }
+}
+
 export function* getTasksByListWatcher() {
    yield takeEvery(FETCH_TASKS, fetchGetTasksByListWorker);
 }
 
 export function* uploadNewTaskWatcher() {
    yield takeEvery(UPLOAD_NEW_TASK, uploadNewTaskWorker);
+}
+export function* deleteTaskWatcher() {
+   yield takeEvery(REQUEST_DELETE_TASK, deleteTaskWorker);
 }

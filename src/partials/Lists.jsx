@@ -18,8 +18,6 @@ const Lists = () => {
       
       const action = { type: 'FETCH_TASKS', payload: { listId } }; //ИСПРАВИТЬ!!!
       dispatch(action); // Диспатч действия с выбранным listId в качестве полезной нагрузки
-
-
       dispatch(setListId(listId))
    };
 
@@ -52,6 +50,12 @@ const Lists = () => {
                </option>
             ))}
          </select>
+         <button 
+            className="button"
+            //onClick={handleUpdateLists}
+         >
+            Удалить список
+         </button>
       </div>
    );
 };

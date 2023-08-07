@@ -1,6 +1,6 @@
 import React from "react";
 
-const TaskItem = ({task, deleteTask, id}) => {
+const TaskItem = ({unicId, task, onDelete}) => {
 
     return (
         <div className="task__item">
@@ -26,7 +26,7 @@ const TaskItem = ({task, deleteTask, id}) => {
             <div className="">
                 <button  
                     className="" 
-                    //onClick={() => {deleteTask(id)}}
+                    onClick={onDelete}
                 >
                     Удалить Задачу
                 </button>
