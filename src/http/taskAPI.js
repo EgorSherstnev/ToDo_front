@@ -16,7 +16,12 @@ export const deleteListAPI = async (id) => {
    return response.data;
 }
 
-//---Lists---//
+export const updateListAPI = async (id, taskList) => {
+   const {data} = await $api.put('api/list/update', {id, taskList})
+   return data
+}
+
+//-------Tasks-------------------------------------------------------------//
 export const createTaskAPI = async (listId, taskName, taskDescription) => {
    const {data} = await $api.post('api/task/create', {listId, taskName, taskDescription:'null'})
    return data
@@ -38,4 +43,9 @@ export const getAllTasks = async() => {
 export const deleteTaskAPI = async (unicId) => {
    const response = await $api.delete(`api/task/delete/${unicId}`);
    return response.data;
+}
+
+export const updateTaskAPI = async (taskName, taskDescription, unicId) => {
+   const {data} = await $api.put('api/task/update', {taskName, taskDescription, unicId})
+   return data
 }

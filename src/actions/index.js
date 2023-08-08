@@ -1,5 +1,4 @@
 import { CREATE_LIST, 
-   DELETE_LIST_SUCCESS, 
    DELETE_TASK, 
    DELETE_TASK_SUCCESS, 
    FETCH_LISTS, 
@@ -8,9 +7,11 @@ import { CREATE_LIST,
    REQUEST_DELETE_LIST, 
    REQUEST_DELETE_TASK, 
    RESET_TASKS, 
+   RESET_UPDATE_LIST, 
    SET_LISTS, 
    SET_SELECTED_LIST_ID, 
    SET_TASKS, 
+   UPDATE_LIST, 
    UPLOAD_NEW_LIST, 
    UPLOAD_NEW_TASK
 } from "./types";
@@ -39,9 +40,13 @@ export const requestDeleteList = list => ({
    payload:list,
 })
 
-export const deleteListSuccess = (id) => ({
-   type: DELETE_LIST_SUCCESS,
-   payload: id,
+export const updateList = list => ({
+   type: UPDATE_LIST,
+   payload: list,
+});
+
+export const resetUpdateList = () => ({
+   type: RESET_UPDATE_LIST
 });
 //----------------------------//
 

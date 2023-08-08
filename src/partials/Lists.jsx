@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchGetLists, resetTasks, setListId } from '../actions';
+import { fetchGetLists, resetTasks, setListId, updateList } from '../actions';
 import { fetchGetTasks } from '../actions';
 import { deleteListAPI, getAllTasks, getTasksByList } from '../http/taskAPI';
 
@@ -31,7 +31,29 @@ const Lists = () => {
       } catch (e) {
          alert(e.response.data.message)
       }
-}
+   }
+
+   const handleUpdateList = async(event) => {
+      event.preventDefault();
+      try {
+         console.log(selectedListId);
+         console.log(listsTasks)
+         const selectedList = listsTasks.find(list => list.id === parseInt(selectedListId));
+         console.log(selectedList);
+         if (selectedList) {
+            const updatedList = {
+               id: selectedList.id,
+               taskList: selectedList.taskList // Используем значение из выбранного списка
+            };
+            dispatch(updateList(updatedList));
+            console.log(updatedList);
+         }
+      } catch (e) {
+         alert(e.response.data.message)
+      }
+   }
+
+
 
    // const click = async(e) => {
    //    e.preventDefault();
@@ -67,6 +89,12 @@ const Lists = () => {
             onClick={handleDeleteLists}
          >
             Удалить список
+         </button>
+         <button 
+            className="button"
+            onClick={handleUpdateList}
+         >
+            Редактировать список
          </button>
       </div>
    );
