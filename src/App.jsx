@@ -1,9 +1,14 @@
 import React, {useState} from "react";
+import { 
+    Routes,
+    Route,
+} from "react-router-dom";
 import "./css/style.css"
 import ListBar from "./partials/ListsBar";
 import Lists from "./partials/Lists";
 import TaskBar from "./partials/TaskBar";
 import TaskList from "./partials/TasksList";
+import TaskDetailsPage from "./partials/TaskDetailsPage";
 
 const App = () => {
     const [tasks, setTasks] = useState([]);
@@ -20,22 +25,27 @@ const App = () => {
     };
 
     return(
-        <div className="wrapper ">
-            <div className="container">
-                <ListBar />
-                <Lists />
-                <div>
-                    <TaskBar onTaskSubmit={onTaskSubmit} />
-                </div>
-                <div>
-                    <TaskList 
-                        tasks={tasks}
-                        deleteTask={deleteTask}
-                    />
-                </div>
-            </div>
-            
-        </div>
+        <Routes>
+            <Route exact path="/" element={
+                <div className="wrapper ">
+                    <div className="container">
+                        <ListBar />
+                        <Lists />
+                        <div>
+                            <TaskBar onTaskSubmit={onTaskSubmit} />
+                        </div>
+                        <div>
+                            <TaskList 
+                                tasks={tasks}
+                                deleteTask={deleteTask}
+                            />
+                        </div>
+                    </div>
+                </div>} 
+            />
+            <Route path="/task/:unicId" element={<TaskDetailsPage />} />
+        </Routes>
+        
     );
 };
 

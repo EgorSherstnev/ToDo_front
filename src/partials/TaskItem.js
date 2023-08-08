@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const TaskItem = ({unicId, task, onDelete}) => {
-
+const TaskItem = ({unicId, task, taskDescription, onDelete}) => {
     return (
         <div className="task__item">
             <div className="">
@@ -16,12 +16,9 @@ const TaskItem = ({unicId, task, onDelete}) => {
                 </button>
             </div>
             <div className="">
-                <button  
-                    className="" 
-                    
-                >
+                <Link to={`/task/${unicId}`} className="button">
                     Добавить описание
-                </button>
+                </Link>
             </div>
             <div className="">
                 <button  

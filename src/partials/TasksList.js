@@ -18,6 +18,7 @@ const TaskList = () => {
                 key={task.unicId}
                 unicId={task.unicId}
                 //deleteTask={deleteTask}
+                taskDescription={task.taskDescription}
                 task={task.taskName}
                 onDelete={() => handleTaskDelete(task.unicId)} // Вызываем handleTaskDelete с unicId
             />
