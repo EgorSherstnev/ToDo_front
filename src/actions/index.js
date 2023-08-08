@@ -1,10 +1,13 @@
 import { CREATE_LIST, 
+   DELETE_LIST_SUCCESS, 
    DELETE_TASK, 
    DELETE_TASK_SUCCESS, 
    FETCH_LISTS, 
    FETCH_TASKS, 
    NEW_TASK, 
+   REQUEST_DELETE_LIST, 
    REQUEST_DELETE_TASK, 
+   RESET_TASKS, 
    SET_LISTS, 
    SET_SELECTED_LIST_ID, 
    SET_TASKS, 
@@ -30,6 +33,16 @@ export const uploadNewList = list => ({
    type: UPLOAD_NEW_LIST,
    payload: list,
 })
+
+export const requestDeleteList = list => ({
+   type: REQUEST_DELETE_LIST,
+   payload:list,
+})
+
+export const deleteListSuccess = (id) => ({
+   type: DELETE_LIST_SUCCESS,
+   payload: id,
+});
 //----------------------------//
 
 export const setListId = listId => ({
@@ -70,4 +83,8 @@ export const requestDeleteTask = task => ({
 export const deleteTaskSuccess = (unicId) => ({
    type: DELETE_TASK_SUCCESS,
    payload: unicId,
+});
+
+export const resetTasks = () => ({
+   type: RESET_TASKS,
 });

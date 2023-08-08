@@ -10,8 +10,9 @@ export const createListAPI = async(taskList) => {
    return data
 }
 
-export const deleteListAPI = async (unicId) => {
-   const response = await $api.delete(`api/task/delete/${unicId}`);
+export const deleteListAPI = async (id) => {
+   console.log("listId  в  deleteListAPI:", id)
+   const response = await $api.delete(`api/list/delete/${id}`);
    return response.data;
 }
 

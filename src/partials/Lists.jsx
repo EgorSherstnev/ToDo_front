@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setListId } from '../actions';
+import { fetchGetLists, resetTasks, setListId } from '../actions';
 import { fetchGetTasks } from '../actions';
-import { getAllTasks, getTasksByList } from '../http/taskAPI';
+import { deleteListAPI, getAllTasks, getTasksByList } from '../http/taskAPI';
 
 const Lists = () => {
    const [selectedListId, setSelectedListId] = useState('');
@@ -20,6 +20,18 @@ const Lists = () => {
       dispatch(action); // Диспатч действия с выбранным listId в качестве полезной нагрузки
       dispatch(setListId(listId))
    };
+
+   const handleDeleteLists = async(event) => {
+      event.preventDefault();
+      try {
+         console.log(selectedListId);
+         await deleteListAPI(selectedListId)
+         dispatch(fetchGetLists())
+         dispatch(resetTasks())
+      } catch (e) {
+         alert(e.response.data.message)
+      }
+}
 
    // const click = async(e) => {
    //    e.preventDefault();
@@ -52,7 +64,7 @@ const Lists = () => {
          </select>
          <button 
             className="button"
-            //onClick={handleUpdateLists}
+            onClick={handleDeleteLists}
          >
             Удалить список
          </button>
