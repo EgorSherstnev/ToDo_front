@@ -3,29 +3,26 @@ import { Link } from "react-router-dom";
 
 const TaskItem = ({unicId, task, taskDescription, onDelete}) => {
     return (
-        <div className="task__item">
-            <div className="">
-                {task}
+        <div className="task__item item">
+            <div className="item__name">
+                <input 
+                    className="item__checkbox"
+                    type="checkbox"
+                />
+                    <span>{task}</span>
             </div>
-            <div className="">
+            
+            <div className="item__buttons">
+                <div className="button button-task">
+                    <Link to={`/task/${unicId}`}  className="link">
+                        edit
+                    </Link>
+                </div>
                 <button  
-                    className="" 
-                    
+                className="button button-delete button-task"
+                onClick={onDelete}
                 >
-                    Редактировать Задачу
-                </button>
-            </div>
-            <div className="">
-                <Link to={`/task/${unicId}`} className="button">
-                    Добавить описание
-                </Link>
-            </div>
-            <div className="">
-                <button  
-                    className="" 
-                    onClick={onDelete}
-                >
-                    Удалить Задачу
+                    delete
                 </button>
             </div>
         </div>

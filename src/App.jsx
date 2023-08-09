@@ -8,7 +8,7 @@ import ListBar from "./partials/ListsBar";
 import Lists from "./partials/Lists";
 import TaskBar from "./partials/TaskBar";
 import TaskList from "./partials/TasksList";
-import TaskDetailsPage from "./partials/TaskDetailsPage";
+import TaskDetailsPage from "./pages/TaskDetailsPage";
 
 const App = () => {
     const [tasks, setTasks] = useState([]);

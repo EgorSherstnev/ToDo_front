@@ -32,7 +32,9 @@ const TaskDetailsPage = () => {
   const handleUpdateTask = async () => {
     try {
       console.log(`handleUpdateTask: taskName ${taskName}, taskDescription ${taskDescription}, unicId ${unicId}`);
-      await updateTaskAPI(taskNameNEW, taskDescriptionNEW, unicId);
+      const updatedTaskName = taskNameNEW || taskName;
+      const updatedTaskDescription = taskDescriptionNEW || taskDescription;
+      await updateTaskAPI(updatedTaskName, updatedTaskDescription, unicId);
       // После успешного обновления задачи переходим на стартовую страницу
       navigate("/");
     } catch (error) {
@@ -41,25 +43,32 @@ const TaskDetailsPage = () => {
   };
 
   return (
-    <div>
-      <h2>Подробности задачи  {task ? task.taskName : ''}</h2>
-      <input
-         className="taskbar__input input"
-        type="text"
-        placeholder="Введите название задачи"
-        value={taskNameNEW}
-        onChange={(e) => setTaskNameNEW(e.target.value)}
-      />
-      <p>{task ? task.taskDescription : ''}</p>
-      <input
-          className="taskbar__input input"
-        type="text"
-        placeholder="Введите описание задачи"
-        value={taskDescriptionNEW}
-        onChange={(e) => setTaskDescriptionNEW(e.target.value)}
-      />
-      <button onClick={handleUpdateTask}>Сохранить изменения</button>
-    </div>
+    <section className='task-details__container container'>
+      <div className='task-details__task-name task-name'>
+        <h2 className='task-name__subtitle subtitle'>Task details:  {task ? task.taskName : ''}</h2>
+        <input
+          className="task-name__input input"
+          type="text"
+          placeholder="Введите название задачи"
+          value={taskNameNEW}
+          onChange={(e) => setTaskNameNEW(e.target.value)}
+        />
+      </div>
+      <div className='task-details__task-description task-description'>
+        <p className='task-description__text'>Task description: {task ? task.taskDescription : ''}</p>
+        <input
+          className="task-description__input input"
+          type="text"
+          placeholder="Введите описание задачи"
+          value={taskDescriptionNEW}
+          onChange={(e) => setTaskDescriptionNEW(e.target.value)}
+        />
+      </div>
+      <button 
+        className='task-details__button button'
+        onClick={handleUpdateTask}
+      >Save changes</button>
+    </section>
   );
 };
 

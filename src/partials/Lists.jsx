@@ -68,34 +68,39 @@ const Lists = () => {
    // }
 
    return (
-      <div>
-         {/* <button 
-            className="button"
-            onClick={click}
+      <div className='lists__container lists'>
+         <h2 className='lists__subtitle subtitle'>
+            Task lists
+         </h2>
+         <select 
+            className='lists__drop'
+            onChange={handleListSelect}
          >
-            Получить задачи
-         </button> */}
-         <h2>Списки задач</h2>
-         <select onChange={handleListSelect}>
             {/* Отображение списка списков в выпадающем списке */}
             {listsTasks.map((list) => (
-               <option key={list.id} value={list.id}>
+               <option 
+                  key={list.id} 
+                  value={list.id}
+               >
                   {list.taskList}
                </option>
             ))}
          </select>
-         <button 
-            className="button"
-            onClick={handleDeleteLists}
-         >
-            Удалить список
-         </button>
-         <button 
-            className="button"
-            onClick={handleUpdateList}
-         >
-            Редактировать список
-         </button>
+         <div className='lists__buttons'>
+            <button 
+               className="button"
+               onClick={handleUpdateList}
+            >
+               Edit the list
+            </button>
+            <button 
+               className="button button-delete"
+               onClick={handleDeleteLists}
+            >
+               Delete a list
+            </button>
+         </div>
+            
       </div>
    );
 };

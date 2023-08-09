@@ -18,6 +18,10 @@ const ListBar = () => {
 
     const handleAddOrUpdateList = async (event) => {
         event.preventDefault();
+        if (!taskList.trim()) {
+            alert("Введите название списка задач");
+            return;
+        }
         try {
             if (updateList) {
                 // Update existing list
@@ -48,29 +52,33 @@ const ListBar = () => {
     }
 
     return (
-        <div className="">
-            
-            <form  className="">
-                <div className="">
-                    <label>{updateList ? "Сохранить изменения" : "Добавить список задач"}</label>
-                    <input 
-                        className="listbar__input input"
-                        type="text"
-                        value={taskList}
-                        onChange={(e) => setTaskList(e.target.value)}
-                    />
-                    <button onClick={handleAddOrUpdateList}>
-                        {updateList ? "Сохранить" : "Добавить"}
-                    </button>
-                    <button 
-                        className="button"
-                        onClick={handleUpdateLists}
-                    >
-                        Обновить
-                    </button>
-                </div>
+        <section className="listbar__container listbar">
+            <h1 className="listbar__title">ToDo List</h1>
+            <button 
+                className="listbar__button button"
+                onClick={handleUpdateLists}
+            >
+                Get data from the server
+            </button>
+            <form  className="listbar__form form">
+                <label className="form__subtitle subtitle">
+                    {updateList ? "Save changes" : "Add a task list"}
+                </label>
+                <input 
+                    className="form__input input"
+                    type="text"
+                    value={taskList}
+                    onChange={(e) => setTaskList(e.target.value)}
+                />
+                <button 
+                    className="form__button button"
+                    onClick={handleAddOrUpdateList}
+                >
+                    {updateList ? "Save" : "Add"}
+                </button>
+                    
             </form>
-        </div>
+        </section>
     );
 };
 

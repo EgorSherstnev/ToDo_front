@@ -14,6 +14,10 @@ const TaskBar = ({onTaskSubmit}) => {
 
     const handleAddTask = async(event) => {
         event.preventDefault();
+        if (!taskName.trim()) {
+            alert("Введите название задачи");
+            return;
+        }
         try {
             console.log(taskName)
             await dispatch(uploadNewTask({
@@ -28,26 +32,29 @@ const TaskBar = ({onTaskSubmit}) => {
     }
 
     return (
-        <div className="">
+        <section className="taskbar__container taskbar">
             
-            <form  className="">
-                <div className="">
-                    <label>Добавить задачу</label>
-                    <input 
-                        className="taskbar__input input"
-                        type="text"
-                        value={taskName}
-                        onChange={onInputChange}
-                    />
-                    <button 
-                        value="clickme"
-                        onClick={handleAddTask }
-                    >
-                        Добавить
-                    </button>
-                </div>
+            <form  className="taskbar__form form">
+                <label
+                    className="form__subtitle subtitle"
+                >
+                    Add a task
+                </label>
+                <input 
+                    className="form__input input"
+                    type="text"
+                    value={taskName}
+                    onChange={onInputChange}
+                />
+                <button 
+                    className="form__button button"
+                    value="clickme"
+                    onClick={handleAddTask }
+                >
+                    Add
+                </button>
             </form>
-        </div>
+        </section>
     );
 };
 
